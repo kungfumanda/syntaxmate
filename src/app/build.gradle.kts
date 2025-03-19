@@ -44,10 +44,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.runtime.ktx)
     // ======== Versões ========
     val compose_version = "1.9.3"
     val compiler_version = "1.5.15"
     val material_version = "1.7.8"
+    val navigation_version = "2.7.3"
 
     // ======== Dependências Principais========
     implementation(libs.androidx.core.ktx)
@@ -58,7 +60,9 @@ dependencies {
     implementation("androidx.compose.compiler:compiler:$compiler_version") // @composable
     implementation("androidx.activity:activity-compose:$compose_version") // setContent
     implementation("androidx.compose.material:material:$material_version") // Text
-        implementation(libs.androidx.ui)
+    implementation("androidx.navigation:navigation-compose:$navigation_version")
+
+    implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)

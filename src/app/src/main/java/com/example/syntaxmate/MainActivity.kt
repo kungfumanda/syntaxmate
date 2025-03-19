@@ -7,10 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.syntaxmate.ui.navigation.AppNavigation
 import com.example.syntaxmate.ui.theme.SyntaxMateTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +24,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SyntaxMateTheme { // Tema configurado em .ui.theme
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = { Text(text = stringResource(R.string.app_name)) }
+                        )
+                    }
+                ) { innerPadding ->
+                    Surface(modifier = Modifier.padding(innerPadding)) {
+                        AppNavigation(navController = navController)
+                    }
                 }
             }
         }
-    }
+
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     SyntaxMateTheme {
-        Greeting("Android")
+
     }
-}
+}}
