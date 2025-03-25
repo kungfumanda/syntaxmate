@@ -68,6 +68,7 @@ fun LanguageCard(
             }
              Icon(
                 painter = painterResource(id = iconResId),
+                tint= Color.Unspecified,
                 contentDescription = "$languageName Icon",
                 modifier = Modifier.size(18.dp)
             )
