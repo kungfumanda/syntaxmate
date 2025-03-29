@@ -1,6 +1,7 @@
 package com.example.syntaxmate
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +20,11 @@ import com.example.syntaxmate.ui.navigation.AppNavigation
 import com.example.syntaxmate.ui.theme.SyntaxMateTheme
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        private const val LOG_TAG = "MainLog"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,15 +45,41 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SyntaxMateTheme {
-
     }
-}}
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LOG_TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LOG_TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LOG_TAG, "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LOG_TAG, "onDestroy")
+    }
+
+
+
+
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        SyntaxMateTheme {
+
+        }
+    }
+}
