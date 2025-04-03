@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -45,11 +46,13 @@ android {
 
 dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
+
     // ======== Versões ========
     val compose_version = "1.9.3"
     val compiler_version = "1.5.15"
     val material_version = "1.7.8"
     val navigation_version = "2.7.3"
+    val room_version = "2.6.1"
 
     // ======== Dependências Principais========
     implementation(libs.androidx.core.ktx)
@@ -77,4 +80,12 @@ dependencies {
     // ======== Debug ========
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // ======== Android Room ========
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-ktx:$room_version")
+
+    //coroutine
+    implementation("androidx.room:room-ktx:$room_version")
 }
