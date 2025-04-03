@@ -15,9 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.syntaxmate.data.model.LanguageEntity
+import com.example.syntaxmate.data.repository.LanguageRepository
 import com.example.syntaxmate.ui.navigation.AppNavigation
 import com.example.syntaxmate.ui.theme.SyntaxMateTheme
+import com.example.syntaxmate.viewmodel.LanguageViewModel
+import kotlinx.coroutines.*
 
 class MainActivity : ComponentActivity() {
 
@@ -25,12 +32,25 @@ class MainActivity : ComponentActivity() {
         private const val LOG_TAG = "MainLog"
     }
 
+    private val languageRepository: LanguageRepository by lazy {
+        LanguageRepository(applicationContext)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val factory = provideLanguageViewModelFactory(languageRepository)
+        val languageViewModel: LanguageViewModel = ViewModelProvider(this, factory).get(LanguageViewModel::class.java)
+
+        languageViewModel.populateTestLanguages()
+        languageViewModel.checkInsertedLanguages()
+
         enableEdgeToEdge()
         setContent {
             SyntaxMateTheme { // Tema configurado em .ui.theme
                 val navController = rememberNavController()
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
@@ -40,12 +60,27 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     Surface(modifier = Modifier.padding(innerPadding)) {
-                        AppNavigation(navController = navController)
+                        AppNavigation(navController = navController, languageViewModel = languageViewModel)
                     }
                 }
             }
         }
+
+
     }
+
+    private fun provideLanguageViewModelFactory(repository: LanguageRepository) :  ViewModelProvider.Factory {
+        return object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(LanguageViewModel::class.java)) {
+                    @Suppress("UNCHECKED_CAST")
+                    return LanguageViewModel(repository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         Log.d(LOG_TAG, "onStart")
