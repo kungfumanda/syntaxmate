@@ -14,7 +14,7 @@ import com.example.syntaxmate.viewmodel.LanguageViewModel
 @Composable
 fun HomeScreen(languageViewModel: LanguageViewModel) {
 
-    val languages by languageViewModel.languages.collectAsState(initial= emptyList())
+    val languages by languageViewModel.languages.collectAsState(initial = emptyList())
     val selectedLanguages by languageViewModel.selectedLanguages.collectAsState(initial = emptyList())
     var languageSearch by remember { mutableStateOf("") }
 
@@ -26,11 +26,12 @@ fun HomeScreen(languageViewModel: LanguageViewModel) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
             Text(
                 text = "Programming Languages",
-                style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.height(20.dp))
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(20.dp))
 
             // Barra de buscas
             OutlinedTextField(
@@ -62,7 +63,9 @@ fun HomeScreen(languageViewModel: LanguageViewModel) {
                     onFavoriteClick = { languageViewModel.toggleFavorite(language) },
                     onSelect = {
                         if (selectedLanguages.none { it.name == language.name }) {
-                            languageViewModel.toggleSelected(language) } }
+                            languageViewModel.toggleSelected(language)
+                        }
+                    }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }

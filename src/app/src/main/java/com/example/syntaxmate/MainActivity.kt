@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val factory = provideLanguageViewModelFactory(languageRepository)
-        val languageViewModel: LanguageViewModel = ViewModelProvider(this, factory).get(LanguageViewModel::class.java)
+        val languageViewModel: LanguageViewModel =
+            ViewModelProvider(this, factory).get(LanguageViewModel::class.java)
 
 
         enableEdgeToEdge()
@@ -55,7 +56,10 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     Surface(modifier = Modifier.padding(innerPadding)) {
-                        AppNavigation(navController = navController, languageViewModel = languageViewModel)
+                        AppNavigation(
+                            navController = navController,
+                            languageViewModel = languageViewModel
+                        )
                     }
                 }
             }
@@ -64,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    private fun provideLanguageViewModelFactory(repository: LanguageRepository) :  ViewModelProvider.Factory {
+    private fun provideLanguageViewModelFactory(repository: LanguageRepository): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 if (modelClass.isAssignableFrom(LanguageViewModel::class.java)) {
