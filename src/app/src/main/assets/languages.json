@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Python",
+    "icon": "ic_python",
+    "isFavorite": false,
+    "paradigm": "Imperative, Object-Oriented",
+    "typing": "Dynamic",
+    "examples": "[{\"title\":\"Hello World\",\"code\":\"print(\\\"Hello, world!\\\")\"},{\"title\":\"If Statement\",\"code\":\"x = 5\\nif x > 0:\\n    print(\\\"Positive\\\")\"},{\"title\":\"For Loop\",\"code\":\"for i in range(5):\\n    print(i)\"},{\"title\":\"Variable Declaration\",\"code\":\"name = \\\"Alice\\\"\\nage = 25\"}]"
+  },
+  {
+    "name": "Kotlin",
+    "icon": "ic_kotlin",
+    "isFavorite": false,
+    "paradigm": "Object-Oriented, Functional",
+    "typing": "Static",
+    "examples": "[{\"title\":\"Hello World\",\"code\":\"fun main() {\\n    println(\\\"Hello, world!\\\")\\n}\"},{\"title\":\"If Statement\",\"code\":\"val x = 5\\nif (x > 0) {\\n    println(\\\"Positive\\\")\\n}\"},{\"title\":\"For Loop\",\"code\":\"for (i in 0..4) {\\n    println(i)\\n}\"},{\"title\":\"Variable Declaration\",\"code\":\"val name = \\\"Alice\\\"\\nvar age = 25\"}]"
+  },
+  {
+    "name": "C++",
+    "icon": "ic_cpp",
+    "isFavorite": false,
+    "paradigm": "Procedural, Object-Oriented",
+    "typing": "Static",
+    "examples": "[{\"title\":\"Hello World\",\"code\":\"#include <iostream>\\n\\nint main() {\\n    std::cout << \\\"Hello, world!\\\" << std::endl;\\n    return 0;\\n}\"},{\"title\":\"If Statement\",\"code\":\"int x = 5;\\nif (x > 0) {\\n    std::cout << \\\"Positive\\\";\\n}\"},{\"title\":\"For Loop\",\"code\":\"for (int i = 0; i < 5; i++) {\\n    std::cout << i << std::endl;\\n}\"},{\"title\":\"Variable Declaration\",\"code\":\"std::string name = \\\"Alice\\\";\\nint age = 25;\"}]"
+  },
+  {
+    "name": "Java",
+    "icon": "ic_java",
+    "isFavorite": false,
+    "paradigm": "Object-Oriented",
+    "typing": "Static",
+    "examples": "[{\"title\":\"Hello World\",\"code\":\"public class Main {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, world!\\\");\\n    }\\n}\"},{\"title\":\"If Statement\",\"code\":\"int x = 5;\\nif (x > 0) {\\n    System.out.println(\\\"Positive\\\");\\n}\"},{\"title\":\"For Loop\",\"code\":\"for (int i = 0; i < 5; i++) {\\n    System.out.println(i);\\n}\"},{\"title\":\"Variable Declaration\",\"code\":\"String name = \\\"Alice\\\";\\nint age = 25;\"}]"
+  },
+  {
+    "name": "JavaScript",
+    "icon": "ic_javascript",
+    "isFavorite": false,
+    "paradigm": "Event-driven, Functional, Object-Oriented",
+    "typing": "Dynamic",
+    "examples": "[{\"title\":\"Hello World\",\"code\":\"console.log(\\\"Hello, world!\\\");\"},{\"title\":\"If Statement\",\"code\":\"let x = 5;\\nif (x > 0) {\\n    console.log(\\\"Positive\\\");\\n}\"},{\"title\":\"For Loop\",\"code\":\"for (let i = 0; i < 5; i++) {\\n    console.log(i);\\n}\"},{\"title\":\"Variable Declaration\",\"code\":\"let name = \\\"Alice\\\";\\nlet age = 25;\"}]"
+  }
+]
