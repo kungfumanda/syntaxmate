@@ -22,8 +22,6 @@ fun HomeScreen(languageViewModel: LanguageViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Center
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -110,41 +108,6 @@ fun HomeScreen(languageViewModel: LanguageViewModel) {
         )
 
         // Inserir resultados depois
-
-
-
-
-//        LazyColumn {
-//            itemsIndexed(languages.value) { index, language ->
-//                LanguageCard(
-//                    languageName = language.name,
-//                    isFavorite = language.isFavorite,
-//                    sizeType = LanguageCardSize.COMPACT,
-//                    onFavoriteClick = { languageViewModel.toggleFavorite(language) },
-//                    onSelect = {
-//                        Log.d("SearchScreen", "Selected: ${language.name}")
-//                    }
-//                )
-//            }
-//        }
-//
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//
-//        // Tô deixando aqui mesmo tendo feito a barra inferior ja pra sabermos como fazer (:
-//        Button(
-//            onClick = { navController.navigate(Routes.Favorites.route) },
-//            modifier = Modifier.padding(top = 16.dp)
-//        ) {
-//            Text(text = "Go to Favorites")
-//        }
-//
-//        Button(
-//            onClick = { navController.navigate(Routes.History.route) },
-//            modifier = Modifier.padding(top = 16.dp)
-//        ) {
-//            Text(text = "Go to History")
-//        }
 
     }
 }
