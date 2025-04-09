@@ -10,6 +10,9 @@ interface LanguageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(language: LanguageEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(languages: List<LanguageEntity>)
+
     @Update
     suspend fun update(language: LanguageEntity)
 

@@ -7,19 +7,15 @@ import kotlinx.coroutines.flow.Flow
 
 class LanguageRepository(context: Context) {
 
-    private val appDatabase: AppDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        AppDatabase::class.java,
-        "language-database"
-    ).build()
+    private val appDatabase: AppDatabase = AppDatabase.getDatabase(context)
 
     private val languageDao = appDatabase.languageDao()
 
-    suspend fun getAllLanguages(): Flow<List<LanguageEntity>> {
+    fun getAllLanguages(): Flow<List<LanguageEntity>> {
         return languageDao.getAllLanguages()
     }
 
-    suspend fun getFavoriteLanguages(): Flow<List<LanguageEntity>> {
+    fun getFavoriteLanguages(): Flow<List<LanguageEntity>> {
         return languageDao.getFavoriteLanguages()
     }
 
