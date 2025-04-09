@@ -1,7 +1,5 @@
 package com.example.syntaxmate.ui.screens
 
-// Futura tela de busca
-
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
@@ -10,12 +8,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.syntaxmate.ui.components.*
 import com.example.syntaxmate.viewmodel.LanguageViewModel
 
 @Composable
-fun SearchScreen(navController: NavController, languageViewModel: LanguageViewModel) {
+fun HomeScreen(languageViewModel: LanguageViewModel) {
 
     val languages by languageViewModel.languages.collectAsState(initial= emptyList())
     val selectedLanguages by languageViewModel.selectedLanguages.collectAsState(initial = emptyList())
