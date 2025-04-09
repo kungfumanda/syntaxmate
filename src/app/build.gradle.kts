@@ -53,6 +53,7 @@ dependencies {
     val material_version = "1.7.8"
     val navigation_version = "2.7.3"
     val room_version = "2.6.1"
+    val gson_version = "2.12.1"
 
     // ======== Dependências Principais========
     implementation(libs.androidx.core.ktx)
@@ -88,4 +89,7 @@ dependencies {
 
     //coroutine
     implementation("androidx.room:room-ktx:$room_version")
+
+    //gson
+    implementation("com.google.code.gson:gson:$gson_version")
 }
