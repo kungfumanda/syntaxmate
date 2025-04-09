@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.syntaxmate.data.local.AppDatabase
 import com.example.syntaxmate.data.local.LanguageDao
 import com.example.syntaxmate.data.model.LanguageEntity
+import kotlinx.coroutines.flow.Flow
 
 class LanguageRepository(context: Context) {
 
@@ -16,11 +17,11 @@ class LanguageRepository(context: Context) {
 
     private val languageDao = appDatabase.languageDao()
 
-    suspend fun getAllLanguages(): List<LanguageEntity> {
+    suspend fun getAllLanguages(): Flow<List<LanguageEntity>> {
         return languageDao.getAllLanguages()
     }
 
-    suspend fun getFavoriteLanguages(): List<LanguageEntity> {
+    suspend fun getFavoriteLanguages(): Flow<List<LanguageEntity>> {
         return languageDao.getFavoriteLanguages()
     }
 

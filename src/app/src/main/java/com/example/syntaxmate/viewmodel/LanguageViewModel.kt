@@ -27,13 +27,17 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
 
     private fun loadLanguages() {
         viewModelScope.launch {
-            _languages.value = repository.getAllLanguages()
+            repository.getAllLanguages().collect({ languages ->
+                _languages.value = languages
+            })
         }
     }
 
     private fun loadFavoriteLanguages() {
         viewModelScope.launch {
-            _favoriteLanguages.value = repository.getFavoriteLanguages()
+            repository.getFavoriteLanguages().collect( { favoriteLanguages ->
+            _favoriteLanguages.value = favoriteLanguages
+            })
         }
     }
 
@@ -62,9 +66,10 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
     // teste
     fun checkInsertedLanguages() {
         viewModelScope.launch {
-            val allLanguages = repository.getAllLanguages()
-            allLanguages.forEach { language ->
-                Log.d("LanguageViewModel", "Language: ${language.name}")
+            repository.getAllLanguages().collect({ languages ->
+                languages.forEach { language ->
+                    Log.d("LanguageViewModel", "Language: ${language.name}" )}
+            })
             }
         }
     }

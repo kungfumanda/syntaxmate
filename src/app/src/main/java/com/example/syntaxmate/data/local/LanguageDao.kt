@@ -2,6 +2,7 @@ package com.example.syntaxmate.data.local
 
 import androidx.room.*
 import com.example.syntaxmate.data.model.LanguageEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LanguageDao {
@@ -13,8 +14,8 @@ interface LanguageDao {
     suspend fun update(language: LanguageEntity)
 
     @Query("SELECT * FROM languages")
-    suspend fun getAllLanguages(): List<LanguageEntity>
+    fun getAllLanguages(): Flow<List<LanguageEntity>>
 
     @Query("SELECT * FROM languages WHERE isFavorite = 1")
-    suspend fun getFavoriteLanguages(): List<LanguageEntity>
+    fun getFavoriteLanguages(): Flow<List<LanguageEntity>>
 }
