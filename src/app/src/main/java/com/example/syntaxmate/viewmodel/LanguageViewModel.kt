@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.syntaxmate.data.model.LanguageEntity
 import com.example.syntaxmate.data.repository.LanguageRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -49,6 +47,19 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
         }
     }
 
+    fun toggleSelected(language: LanguageEntity) {
+        val current = _selectedLanguages.value.toMutableList()
+
+        if (current.contains(language)) {
+            current.remove(language)
+        } else {
+            current.add(language)
+        }
+        _selectedLanguages.value = current
+    }
+
+
+
     // teste
     fun populateTestLanguages() {
         val testLanguages = listOf(
@@ -73,5 +84,3 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
             }
         }
     }
-
-}
