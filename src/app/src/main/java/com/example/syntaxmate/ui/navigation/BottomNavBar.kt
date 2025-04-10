@@ -18,15 +18,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
     object Search : BottomNavItem(Routes.Search.route, Icons.Default.Search, "Search") // Posteriormente serão icons
     object Favorites : BottomNavItem(Routes.Favorites.route, Icons.Default.Favorite, "Favorites")
-    object History : BottomNavItem(Routes.History.route, Icons.Default.Refresh, "History")
 }
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem.Search,
-        BottomNavItem.Favorites,
-        BottomNavItem.History
+        BottomNavItem.Favorites
     )
 
     val currentRoute = navController.currentBackStackEntryAsState()?.value?.destination?.route
