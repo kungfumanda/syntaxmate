@@ -21,4 +21,8 @@ interface LanguageDao {
 
     @Query("SELECT * FROM languages WHERE isFavorite = 1")
     fun getFavoriteLanguages(): Flow<List<LanguageEntity>>
+
+    @Query("SELECT COUNT(*) FROM languages")
+    suspend fun getCount(): Int
+
 }
