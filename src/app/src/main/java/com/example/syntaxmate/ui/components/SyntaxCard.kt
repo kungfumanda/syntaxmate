@@ -71,6 +71,10 @@ fun SyntaxCard(
             ) {
                 val iconResId = when (languageName) {
                     "Python" -> R.drawable.ic_python_light
+                    "JavaScript" -> R.drawable.skill_icons__js_light
+                    "Java" -> R.drawable.skill_icons__java_light
+                    "C++" -> R.drawable.skill_icons__cpp_light
+                    "Kotlin" -> R.drawable.skill_icons__kotlin_light
                     else -> R.drawable.ic_launcher_foreground
                 }
 
