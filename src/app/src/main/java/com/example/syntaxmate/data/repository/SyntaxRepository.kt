@@ -12,7 +12,7 @@ class SyntaxRepository(context: Context) {
     private val syntaxDao = appDatabase.syntaxDao()
 
 
-    fun getAllSyntax(): Flow<List<SyntaxEntity>> {
+    fun getAllSyntaxes(): Flow<List<SyntaxEntity>> {
         return syntaxDao.getAllSyntax()
     }
 
