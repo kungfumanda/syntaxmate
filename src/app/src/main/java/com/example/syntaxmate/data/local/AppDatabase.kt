@@ -7,10 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.syntaxmate.data.Converters
 import com.example.syntaxmate.data.model.CodeExample
 import com.example.syntaxmate.data.model.LanguageEntity
 import com.example.syntaxmate.data.model.SyntaxEntity
+import com.example.syntaxmate.workers.SyncLanguagesWorker
+import com.example.syntaxmate.workers.SyncLanguagesWorker.Companion.KEY_FILENAME
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
@@ -49,54 +54,12 @@ abstract class AppDatabase : RoomDatabase() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             Log.d("PopulateDB", "Iniciando BD")
-            // roda num thread separado
-            CoroutineScope(Dispatchers.IO).launch {
-                INSTANCE?.let { database ->
-                    populateDatabase(context, database)
-                }
-            }
+            val request = OneTimeWorkRequestBuilder<SyncLanguagesWorker>()
+                .setInputData(workDataOf(KEY_FILENAME to "languages.json"))
+                .build()
+
+            WorkManager.getInstance(context).enqueue(request)
         }
-
-
-        private suspend fun populateDatabase(context: Context, database: AppDatabase) {
-
-            Log.d("PopulateDB", "Iniciando leitura do JSON")
-            val gson = Gson()
-
-            val json = context.assets.open("languages.json").bufferedReader().use { it.readText() }
-            val languagesType = object : TypeToken<List<LanguageEntity>>() {}.type
-            val languages: List<LanguageEntity> = gson.fromJson(json, languagesType)
-            Log.d("PopulateDB", "JSON lido com sucesso")
-
-
-            database.languageDao().insertAll(languages)
-            Log.d("PopulateDB", "Linguages inseridas com sucesso")
-
-            val syntaxList = mutableListOf<SyntaxEntity>()
-            for (language in languages) {
-                val examplesType = object: TypeToken<List<CodeExample>>() {}.type
-                val examples: List<CodeExample> = gson.fromJson(language.examples, examplesType)
-
-                val syntaxes = examples.map { example ->
-                    SyntaxEntity(
-                        title = example.title,
-                        code = example.code,
-                        languageName = language.name,
-                        isFavorite = false,
-                        tag = emptyList() // add depois
-                    )
-                }
-
-                syntaxList.addAll(syntaxes)
-
-            }
-
-            database.syntaxDao().insertAllSyntax(syntaxList)
-            Log.d("PopulateDB", "Sintaxes inseridas com sucesso")
-
-
-        }
-
 
     }
 
