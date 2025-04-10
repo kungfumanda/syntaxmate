@@ -19,9 +19,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.syntaxmate.data.repository.LanguageRepository
+import com.example.syntaxmate.data.repository.SyntaxRepository
 import com.example.syntaxmate.ui.navigation.AppNavigation
 import com.example.syntaxmate.ui.theme.SyntaxMateTheme
 import com.example.syntaxmate.viewmodel.LanguageViewModel
+import com.example.syntaxmate.viewmodel.SyntaxViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -32,14 +34,19 @@ class MainActivity : ComponentActivity() {
     private val languageRepository: LanguageRepository by lazy {
         LanguageRepository(applicationContext)
     }
+    private val syntaxRepository: SyntaxRepository by lazy {
+        SyntaxRepository(applicationContext)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = provideLanguageViewModelFactory(languageRepository)
+        val languageFactory = provideLanguageViewModelFactory(languageRepository)
         val languageViewModel: LanguageViewModel =
-            ViewModelProvider(this, factory).get(LanguageViewModel::class.java)
+            ViewModelProvider(this, languageFactory).get(LanguageViewModel::class.java)
+        val syntaxFactory = provideSyntaxViewModelFactory(syntaxRepository)
+        val syntaxViewModel: SyntaxViewModel = ViewModelProvider(this, syntaxFactory).get(SyntaxViewModel::class.java)
 
 
         enableEdgeToEdge()
@@ -58,7 +65,8 @@ class MainActivity : ComponentActivity() {
                     Surface(modifier = Modifier.padding(innerPadding)) {
                         AppNavigation(
                             navController = navController,
-                            languageViewModel = languageViewModel
+                            languageViewModel = languageViewModel,
+                            syntaxViewModel = syntaxViewModel
                         )
                     }
                 }
@@ -79,6 +87,19 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun provideSyntaxViewModelFactory(repository: SyntaxRepository): ViewModelProvider.Factory {
+        return object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(SyntaxViewModel::class.java)) {
+                    @Suppress("UNCHECKED_CAST")
+                    return SyntaxViewModel(repository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
+            }
+        }
+    }
+
 
     override fun onStart() {
         super.onStart()

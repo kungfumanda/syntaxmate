@@ -11,10 +11,11 @@ import com.example.syntaxmate.ui.screens.FavoritesScreen
 import com.example.syntaxmate.ui.screens.HistoryScreen
 import com.example.syntaxmate.ui.screens.HomeScreen
 import com.example.syntaxmate.viewmodel.LanguageViewModel
+import com.example.syntaxmate.viewmodel.SyntaxViewModel
 
 
 @Composable
-fun AppNavigation(navController: NavHostController, languageViewModel: LanguageViewModel) {
+fun AppNavigation(navController: NavHostController, languageViewModel: LanguageViewModel, syntaxViewModel: SyntaxViewModel) {
 
    Scaffold (
        bottomBar = { BottomNavigationBar(navController) }
@@ -23,7 +24,7 @@ fun AppNavigation(navController: NavHostController, languageViewModel: LanguageV
        startDestination = "search",
        modifier = Modifier.padding(innerPadding)
    ) {
-        composable("search") { HomeScreen(languageViewModel) }
+        composable("search") { HomeScreen(languageViewModel, syntaxViewModel) }
         composable("favorites") { FavoritesScreen(navController) }
         composable("history") { HistoryScreen(navController) }
     } }

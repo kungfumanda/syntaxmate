@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.syntaxmate.R
@@ -93,7 +91,7 @@ fun SyntaxCard(
                     Icon(
                         imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "Favorite",
-                        tint = if (isFavorite) Color.Red else Color.Gray
+                        tint = if (isFavorite) Color.DarkGray else Color.Gray
                     )
                 }
             }
@@ -147,33 +145,4 @@ fun SyntaxCard(
         }
     }
 
-}
-
-@Composable
-fun TestSyntaxCard() {
-    var isFavorite by remember { mutableStateOf(false) }
-
-    SyntaxCard(
-        languageName = "Python",
-        syntaxTitle = "For Loop",
-        codeSnippet = """
-            for i in range(5):
-                print(i)
-        """.trimIndent(),
-        tags = listOf("loop", "iteration", "beginner"),
-        isFavorite = isFavorite,
-        onFavoriteClick = { isFavorite = !isFavorite }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewSyntaxCard() {
-    SyntaxCard(
-        languageName = "Python",
-        syntaxTitle = "Loop For",
-        codeSnippet = "for i in range(5):\n    print(i)",
-        tags = listOf("laço", "repetição", "python"),
-        isFavorite = true
-    )
 }
