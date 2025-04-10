@@ -110,7 +110,10 @@ fun HomeScreen(languageViewModel: LanguageViewModel) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        // Inserir resultados depois
+
+        MaterialTheme {
+            TestSyntaxCard()
+        }
 
     }
 }
