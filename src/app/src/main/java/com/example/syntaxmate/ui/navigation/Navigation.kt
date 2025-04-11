@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.syntaxmate.ui.screens.FavoritesScreen
-import com.example.syntaxmate.ui.screens.HistoryScreen
 import com.example.syntaxmate.ui.screens.HomeScreen
 import com.example.syntaxmate.viewmodel.LanguageViewModel
 import com.example.syntaxmate.viewmodel.SyntaxViewModel
@@ -26,7 +25,6 @@ fun AppNavigation(navController: NavHostController, languageViewModel: LanguageV
    ) {
         composable("search") { HomeScreen(languageViewModel, syntaxViewModel) }
         composable("favorites") { FavoritesScreen(languageViewModel,syntaxViewModel,navController) }
-        composable("history") { HistoryScreen(navController) }
     } }
 }
 
