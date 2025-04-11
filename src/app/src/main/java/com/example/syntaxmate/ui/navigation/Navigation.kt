@@ -24,7 +24,7 @@ fun AppNavigation(navController: NavHostController, languageViewModel: LanguageV
        modifier = Modifier.padding(innerPadding)
    ) {
         composable("search") { HomeScreen(languageViewModel, syntaxViewModel) }
-        composable("favorites") { FavoritesScreen(navController) }
+        composable("favorites") { FavoritesScreen(languageViewModel,syntaxViewModel,navController) }
     } }
 }
 

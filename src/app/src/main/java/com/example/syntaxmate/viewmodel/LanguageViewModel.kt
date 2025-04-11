@@ -13,8 +13,8 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
     private val _languages = MutableStateFlow<List<LanguageEntity>>(emptyList())
     val languages: StateFlow<List<LanguageEntity>> = _languages
 
-    private val _favoriteLanguages = MutableStateFlow<List<LanguageEntity>>(emptyList())
-    val favoriteLanguages: StateFlow<List<LanguageEntity>> = _favoriteLanguages
+     val favoriteLanguagesMutable = MutableStateFlow<List<LanguageEntity>>(emptyList())
+    val favoriteLanguages: StateFlow<List<LanguageEntity>> = favoriteLanguagesMutable
 
     private val _selectedLanguages = MutableStateFlow<List<LanguageEntity>>(emptyList())
     val selectedLanguages: StateFlow<List<LanguageEntity>> = _selectedLanguages
@@ -35,7 +35,7 @@ class LanguageViewModel(private val repository: LanguageRepository) : ViewModel(
     private fun loadFavoriteLanguages() {
         viewModelScope.launch {
             repository.getFavoriteLanguages().collect { favoriteLanguages ->
-                _favoriteLanguages.value = favoriteLanguages
+                favoriteLanguagesMutable.value = favoriteLanguages
             }
         }
     }
