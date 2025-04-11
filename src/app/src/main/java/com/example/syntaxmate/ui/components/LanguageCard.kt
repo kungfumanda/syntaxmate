@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.example.syntaxmate.R
 
 enum class LanguageCardSize {
-    COMPACT, LARGE
+    COMPACT, LARGE, EXTRA_LARGE
 }
 
 @Composable
@@ -35,16 +35,19 @@ fun LanguageCard(
     val cardModifier = when (sizeType) {
         LanguageCardSize.COMPACT -> Modifier.size(width=150.dp, height = 50.dp)
         LanguageCardSize.LARGE -> Modifier.width(250.dp)
+        LanguageCardSize.EXTRA_LARGE -> Modifier.fillMaxWidth()
     }
 
     val paddingValues = when (sizeType) {
         LanguageCardSize.COMPACT -> 8.dp
         LanguageCardSize.LARGE -> 16.dp
+        LanguageCardSize.EXTRA_LARGE -> 24.dp
     }
 
     val fontSizes = when (sizeType) {
         LanguageCardSize.COMPACT -> 10.sp
         LanguageCardSize.LARGE -> 16.sp
+        LanguageCardSize.EXTRA_LARGE -> 24.sp
     }
 
     Card(
@@ -82,20 +85,33 @@ fun LanguageCard(
                 modifier = Modifier.weight(1f)
             )
 
-            IconButton(modifier = Modifier.size(24.dp), onClick = if (sizeType == LanguageCardSize.LARGE) onFavoriteClick else onRemoveClick) {
+            IconButton(modifier = Modifier.size(24.dp), onClick = if (sizeType != LanguageCardSize.COMPACT) onFavoriteClick else onRemoveClick) {
                 Icon(
-                    imageVector = if (sizeType == LanguageCardSize.LARGE) {
+                    imageVector = if (sizeType != LanguageCardSize.COMPACT ) {
                         if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder
                     } else {
                         Icons.Default.Close
                     },
-                    contentDescription = if (sizeType == LanguageCardSize.LARGE) "Favorite Button" else "Remove Button",
+                    contentDescription = if (sizeType != LanguageCardSize.COMPACT) "Favorite Button" else "Remove Button",
                     tint = if (sizeType == LanguageCardSize.LARGE && isFavorite) Color.DarkGray else Color.Gray
                 )
             }
 
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewLanguageCardExtraLarge() {
+    LanguageCard(
+        languageName = "Python",
+        isFavorite = false,
+        isSelected = false,
+        sizeType = LanguageCardSize.EXTRA_LARGE,
+        onFavoriteClick = {},
+        onSelect = {}
+    )
 }
 
 @Preview
