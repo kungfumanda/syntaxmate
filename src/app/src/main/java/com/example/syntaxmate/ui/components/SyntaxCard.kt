@@ -110,6 +110,7 @@ fun SyntaxCard(
             Column(modifier = Modifier.padding(top = 5.dp)) {
 
                 Text(
+                    modifier = Modifier.padding(horizontal = 12.dp),
                     text = "Language: $languageName",
                     fontSize = 12.sp
                 )
